@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Clinic</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+   </head>
+    <body>
+
+        <div id="ADD">
+        <form action="/add_patient" method="POST">
+            <label for="pesel">PESEL:</label>
+            <input type="text" id="pesel" name="pesel">
+
+            <label for="name">First Name:</label>
+            <input type="text" id="name" name="name">
+
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name">
+
+            <label for="street">Street:</label>
+            <input type="text" id="street" name="street">
+
+            <label for="zipcode">Zip Code:</label>
+            <input type="text" id="zipcode" name="zipcode">
+
+            <input type="submit" value="ADD" id="add_btn">
+        </form>
+        </div>
+
+        <div id="DEL">
+            <form action="/del_patient" method="POST">
+                <label for="pesel1">PESEL:</label>
+                <input type="text" id="pesel1" name="pesel1">
+
+                <input type="submit" value="DELETE" id="del_btn">
+            </form>
+        </div>
+
+        <div id="EDIT">
+            <form action="/edit_patient" method="POST">
+                <label for="pesel2">PESEL:</label>
+                <input type="text" id="pesel2" name="pesel2">
+                <label for="new_val">Change:</label>
+                <input type="text" id="new_val" name="new_val">
+                <select name="edit_patient">
+                    {% for i in array %}
+                    <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="EDIT" id="edit_btn">
+            </form>
+        </div>
+
+        <div id="PRINT">
+        <form action="/print" method="POST">
+            <select name="sort_by">
+                    {% for i in array %}
+                    <option value="{{ loop.index }}">{{ i }}</option>
+                    {% endfor %}
+            </select>
+            <select name="sort_type">
+                <option value="Normal">Normal</option>
+                <option value="Increasing">Increasing</option>
+                <option value="Decreasing">Decreasing</option>
+            </select>
+            <input type="submit" value="LIST" id="list_btn">
+            <br>
+            <br>
+            <br>
+
+            <table>
+                <thead>
+                    <tr>
+                        {% for i in array %}
+                            <th>{{ i }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data %}
+                    <tr>
+                        {% for j in i %}
+                        <td>{{ j }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </form>
+        </div>
+    </body>
+</html>
