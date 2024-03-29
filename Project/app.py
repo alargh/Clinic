@@ -19,7 +19,7 @@ def add_patient():
     last_name = request.form.get('last_name')
     street = request.form.get('street')
     city = request.form.get('city')
-    zip_code = request.form.get('zip_code')
+    zip_code = request.form.get('zipcode')
 
     try:
         connection = get_db()
